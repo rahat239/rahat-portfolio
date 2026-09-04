@@ -107,6 +107,30 @@ nav{
 .card-tags{font-size:12px;color:rgba(138,163,199,.6);margin-top:auto;padding-top:8px;}
 .chip{display:inline-block;background:var(--teal2);color:var(--teal);font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;margin-left:6px;letter-spacing:.04em;vertical-align:middle;}
 
+/* ── PUBLICATIONS ── */
+#publications{padding:0 var(--pad) 100px;max-width:1200px;margin:0 auto;}
+.pub-sub{margin-bottom:52px;}
+.pub-sub:last-child{margin-bottom:0;}
+.pub-sub-h{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--sl3);letter-spacing:.06em;text-transform:uppercase;padding-bottom:12px;margin-bottom:20px;border-bottom:1px solid var(--line);}
+.pub-sub-h .count{font-size:11px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--slate);background:rgba(255,255,255,.05);padding:2px 9px;border-radius:100px;}
+.pub-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.pub-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .22s,border-color .22s,box-shadow .22s;}
+.pub-card:hover{transform:translateY(-5px);border-color:rgba(100,255,218,.2);box-shadow:0 22px 44px rgba(0,0,0,.35);}
+.pub-thumb{width:100%;aspect-ratio:3/4;background:var(--bg);overflow:hidden;}
+.pub-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.pub-body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.pub-badges{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.pub-badge{display:inline-block;font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;letter-spacing:.04em;}
+.pub-badge.q1{background:var(--teal2);color:var(--teal);}
+.pub-badge.status{background:rgba(255,255,255,.06);color:var(--sl2);}
+.pub-title{font-size:15px;font-weight:600;color:var(--white);line-height:1.35;}
+.pub-desc{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65;flex:1;}
+.pub-meta{font-size:12px;color:rgba(138,163,199,.6);}
+.pub-link{color:var(--teal);font-size:13px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;width:fit-content;transition:gap .18s;margin-top:2px;}
+.pub-link:hover{gap:10px;}
+.pub-card.pub-empty{align-items:center;justify-content:center;text-align:center;border-style:dashed;background:transparent;padding:28px 18px;min-height:220px;}
+.pub-card.pub-empty:hover{transform:none;box-shadow:none;border-color:var(--line);}
+
 /* ── HARDWARE ── */
 #hardware{padding:0 var(--pad) 100px;max-width:1200px;margin:0 auto;}
 .hw-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
@@ -144,6 +168,7 @@ footer a{color:var(--teal);text-decoration:none;}
   #hero{gap:50px;}
   .ab-inner{grid-template-columns:1fr 260px;gap:40px;}
   .cards{grid-template-columns:repeat(2,1fr);}
+  .pub-cards{grid-template-columns:repeat(2,1fr);}
 }
 
 /* Tablet */
@@ -165,6 +190,7 @@ footer a{color:var(--teal);text-decoration:none;}
   .ab-photo{max-width:280px;margin:0 auto;}
 
   .cards{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .pub-cards{grid-template-columns:repeat(2,1fr);gap:14px;}
   .hw-row{grid-template-columns:1fr 1fr;gap:16px;}
 }
 
@@ -177,6 +203,7 @@ footer a{color:var(--teal);text-decoration:none;}
   #asc{width:240px!important;height:240px!important;}
 
   .cards{grid-template-columns:1fr;}
+  .pub-cards{grid-template-columns:1fr;}
   .card{padding:20px;}
 
   .hw-row{grid-template-columns:1fr;}
@@ -186,6 +213,7 @@ footer a{color:var(--teal);text-decoration:none;}
 
   #about{padding:60px var(--pad);}
   #software{padding:0 var(--pad) 60px;}
+  #publications{padding:0 var(--pad) 60px;}
   #hardware{padding:0 var(--pad) 60px;}
   #contact{padding:60px var(--pad) 80px;}
   footer{padding:20px var(--pad);flex-direction:column;text-align:center;gap:4px;}
@@ -202,6 +230,7 @@ footer a{color:var(--teal);text-decoration:none;}
     <li><a href="#hero">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#software" class="act">Software</a></li>
+    <li><a href="#publications">Publications</a></li>
     <li><a href="#hardware">Hardware</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -220,6 +249,7 @@ footer a{color:var(--teal);text-decoration:none;}
   <a href="#hero" class="mob-link">Home</a>
   <a href="#about" class="mob-link">About</a>
   <a href="#software" class="mob-link">Software</a>
+  <a href="#publications" class="mob-link">Publications</a>
   <a href="#hardware" class="mob-link">Hardware</a>
   <a href="#contact" class="mob-link">Contact</a>
   <div class="mob-icons">
@@ -314,6 +344,70 @@ footer a{color:var(--teal);text-decoration:none;}
       <div class="card-desc">Founded and lead MeowMatchBD — connecting cat lovers with adoptable cats across Bangladesh. Built product and team from the ground up.</div>
       <div class="card-tags">React.js, Python, Platform, Startup</div>
     </div></div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <h2 class="sh">publications</h2>
+
+  <div class="pub-sub">
+    <div class="pub-sub-h">Journals <span class="count">1</span></div>
+    <div class="pub-cards">
+      <div class="pub-card">
+        <div class="pub-thumb"><img src="assets/array" alt="Array journal thumbnail" /></div>
+        <div class="pub-body">
+          <div class="pub-badges"><span class="pub-badge q1">Q1 Journal</span><span class="pub-badge status">Accepted</span></div>
+          <div class="pub-title">An Explainable, Cost-Aware Hybrid Framework for Fraudulent Online Job Posting Detection</div>
+          <div class="pub-desc">Hybrid SVM + DistilBERT pipeline for fraudulent job posting detection on the EMSCAD dataset, with explainability and cost-aware thresholds.</div>
+          <div class="pub-meta">Array &middot; Elsevier</div>
+          <a href="https://www.sciencedirect.com/journal/array" target="_blank" class="pub-link">View journal &nbsp;&#8594;</a>
+        </div>
+      </div>
+      <div class="pub-card pub-empty">
+        <div>
+          <div style="font-size:36px;margin-bottom:12px;opacity:.3;">&#128218;</div>
+          <div style="font-size:14px;font-weight:500;color:var(--sl3);margin-bottom:4px;">More on the way</div>
+          <div style="font-size:13px;font-weight:300;">Several papers currently under review.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-sub">
+    <div class="pub-sub-h">Conferences <span class="count">0</span></div>
+    <div class="pub-cards">
+      <div class="pub-card pub-empty">
+        <div>
+          <div style="font-size:36px;margin-bottom:12px;opacity:.3;">&#127908;</div>
+          <div style="font-size:14px;font-weight:500;color:var(--sl3);margin-bottom:4px;">Nothing yet</div>
+          <div style="font-size:13px;font-weight:300;">First conference paper coming soon.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-sub">
+    <div class="pub-sub-h">Books <span class="count">1</span></div>
+    <div class="pub-cards">
+      <div class="pub-card">
+        <div class="pub-thumb"><img src="assets/book" alt="Book cover" /></div>
+        <div class="pub-body">
+          <div class="pub-badges"><span class="pub-badge status">Published</span></div>
+          <div class="pub-title">Predicting Silent Behavioral Drift Severity: From Default-Argument Breaking Changes in Python Machine Learning Libraries</div>
+          <div class="pub-desc">On predicting the severity of silent behavioral drift caused by default-argument breaking changes across Python ML libraries.</div>
+          <div class="pub-meta">Amazon</div>
+          <a href="https://www.amazon.com/dp/9999352162" target="_blank" class="pub-link">View on Amazon &nbsp;&#8594;</a>
+        </div>
+      </div>
+      <div class="pub-card pub-empty">
+        <div>
+          <div style="font-size:36px;margin-bottom:12px;opacity:.3;">&#128218;</div>
+          <div style="font-size:14px;font-weight:500;color:var(--sl3);margin-bottom:4px;">More on the way</div>
+          <div style="font-size:13px;font-weight:300;">Next book in progress.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- HARDWARE -->
