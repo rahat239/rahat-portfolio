@@ -201,7 +201,6 @@ footer a{color:var(--teal);text-decoration:none;}
   .hero-r{order:2;max-width:100%;text-align:center;}
   .hero-p{margin-left:auto;margin-right:auto;}
   .btn-hi{margin:0 auto;}
-  #asc{width:280px!important;height:280px!important;}
 
   .ab-inner{grid-template-columns:1fr;gap:40px;}
   .ab-photo{max-width:280px;margin:0 auto;}
@@ -216,7 +215,6 @@ footer a{color:var(--teal);text-decoration:none;}
   nav{padding:0 20px;}
 
   .hero-big{font-size:36px;}
-  #asc{width:240px!important;height:240px!important;}
 
   .cards{grid-template-columns:1fr;}
   .card{padding:20px;}
@@ -231,6 +229,21 @@ footer a{color:var(--teal);text-decoration:none;}
   #hardware{padding:0 var(--pad) 60px;}
   #contact{padding:60px var(--pad) 80px;}
   footer{padding:20px var(--pad);flex-direction:column;text-align:center;gap:4px;}
+}
+
+/* responsive fixes */
+@media(max-width:860px){
+  .hero-r > div{justify-content:center;}
+  .btn-hi{margin:0;}
+  .hero-l{margin-bottom:12px;}
+}
+@media(max-width:560px){
+  .pub-cards,.hw-row{grid-template-columns:1fr;}
+  .pub-card.pub-empty{min-height:0;padding:18px;}
+  .hw-soon{min-height:0;padding:24px;}
+  .hero-r > div{gap:10px!important;}
+  .btn-hi{padding:12px 20px;}
+  .ab-text p{font-size:16px;}
 }
 </style>
 </head>
@@ -584,11 +597,12 @@ document.querySelectorAll('.mob-link').forEach(a=>a.addEventListener('click',()=
 /* ASCII canvas: responsive size */
 const cv=document.getElementById('asc');
 const ctx=cv.getContext('2d');
+const CSSV=getComputedStyle(document.documentElement);const ASC_RGB=CSSV.getPropertyValue('--ascii-rgb').trim()||'100,255,218';const ASC_INV=CSSV.getPropertyValue('--ascii-invert').trim()==='1';
 const CHARS=['.','·',',','-','~',':',';','=','+','*','#'];
 
 function getCanvasSize(){
-  if(window.innerWidth<=560) return [240,240];
-  if(window.innerWidth<=860) return [280,280];
+  if(window.innerWidth<=560) return [Math.min(300,window.innerWidth-40),340];
+  if(window.innerWidth<=860) return [320,400];
   return [400,560];
 }
 
@@ -602,7 +616,7 @@ img.onload=()=>{
     const off=document.createElement('canvas');
     off.width=cw;off.height=ch;
     const oc=off.getContext('2d');
-    const sc=Math.min(cw/img.width,ch/img.height)*0.72;
+    const sc=Math.min(cw/img.width,ch/img.height)*(cw<400?.95:.72);
     const dw=img.width*sc,dh=img.height*sc;
     oc.drawImage(img,(cw-dw)/2,(ch-dh)/2,dw,dh);
     const px=oc.getImageData(0,0,cw,ch).data;
@@ -611,8 +625,8 @@ img.onload=()=>{
       const i=(y*cw+x)*4;
       const r=px[i],g=px[i+1],b=px[i+2],a=px[i+3];
       if(a<60)continue;
-      const br=r*.299+g*.587+b*.114;
-      if(br<15)continue;
+      let br=r*.299+g*.587+b*.114;
+      if(br<15)continue;if(ASC_INV)br=90+(255-br)*.65;
       const ci=Math.min(CHARS.length-1,Math.floor((br/255)*CHARS.length));
       pts.push({char:CHARS[ci],ox:x,oy:y,cx:x+(Math.random()-.5)*SC,cy:y+(Math.random()-.5)*SC,dl:SC?Math.random()*.3:0,op:0.18+(br/255)*.82,vx:0,vy:0,fr:.80+Math.random()*.14});
     }
@@ -657,7 +671,7 @@ img.onload=()=>{
       if(d<R){const a=Math.atan2(dy,dx),push=(R-d)/R;p.vx+=Math.cos(a)*push*F;p.vy+=Math.sin(a)*push*F;}
       p.vx+=(p.ox-p.cx)*k;p.vy+=(p.oy-p.cy)*k;
       p.vx*=p.fr;p.vy*=p.fr;p.cx+=p.vx;p.cy+=p.vy;
-      ctx.fillStyle=`rgba(100,255,218,${(p.op*fade).toFixed(2)})`;
+      ctx.fillStyle=`rgba(${ASC_RGB},${(p.op*fade).toFixed(2)})`;
       ctx.fillText(p.char,p.cx,p.cy);
     }
     requestAnimationFrame(draw);
